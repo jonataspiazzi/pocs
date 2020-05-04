@@ -1,0 +1,6 @@
+{
+  "restartable": false,
+  "events": {
+    "crash": "exit || quit"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "console-menu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "node build/index.js",
+    "build": "tsc --build ./tsconfig.json",
+    "watch-tsc": "npm run build && tsc --watch",
+    "watch-node": "nodemon build/index.js",
+    "prod": "npm run build && npm run start",
+    "dev": "npm run build && concurrently \"npm:watch-tsc\" \"npm:watch-node\""
+  },
+  "dependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/node": "^13.11.1",
+    "concurrently": "^5.1.0",
+    "inquirer": "^7.1.0",
+    "nodemon": "^2.0.3",
+    "typescript": "^3.8.3"
+  }
+}
