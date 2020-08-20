@@ -12,7 +12,7 @@
     "dev": "npm run build && concurrently \"tsc --watch\" \"nodemon build/app.js\""
   },
   "dependencies": {
-    "bcrypt": "^3.0.8",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.0.0",
     "dotenv": "^8.1.0",
