@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --watch --progress --port 9000 --open"
+    "webp": "webpack-dev-server --watch --progress --port 9000 --open",
+    "static": "http-server --port 3001 static-files --localhost --cors",
+    "dev": "concurrently \"npm run webp\" \"npm run static\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "html-webpack-plugin": "^4.3.0",
+    "http-server": "^0.12.3",
     "ts-loader": "^8.0.3",
     "typescript": "^4.0.2",
     "webpack": "^4.44.1",
