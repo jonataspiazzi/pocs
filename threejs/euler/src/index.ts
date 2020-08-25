@@ -9,7 +9,6 @@ animate();
 function init() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xcccccc);
-    scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -28,6 +27,8 @@ function init() {
     controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     controls.dampingFactor = 0.05;
 
+    controls.autoRotate = true;
+
     controls.screenSpacePanning = false;
 
     controls.minDistance = 100;
@@ -35,65 +36,77 @@ function init() {
 
     controls.maxPolarAngle = Math.PI / 2;
 
-    // world
+    // helpers
 
-    var geometry = new THREE.CylinderBufferGeometry(0, 10, 30, 4, 1);
-    var material = new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true });
+    const gX = new THREE.GridHelper(200, 16, "#aaa", "#666");
+    const gY = new THREE.GridHelper(200, 16, "#aaa", "#666");
+    const gZ = new THREE.GridHelper(200, 16, "#aaa", "#666");
 
-    for (var i = 0; i < 500; i++) {
+    gX.rotateZ(Math.PI / 2);
+    gY.rotateY(Math.PI / 2);
+    gZ.rotateX(Math.PI / 2);
 
-        var mesh = new THREE.Mesh(geometry, material);
-        mesh.position.x = Math.random() * 1600 - 800;
-        mesh.position.y = 0;
-        mesh.position.z = Math.random() * 1600 - 800;
-        mesh.updateMatrix();
-        mesh.matrixAutoUpdate = false;
-        scene.add(mesh);
+    scene.add(gX);
+    scene.add(gY);
+    scene.add(gZ);
 
-    }
+    scene.add(new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, 0, 0), 240, 0xff0000));
+    scene.add(new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 240, 0x00ff00));
+    scene.add(new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 240, 0x0000ff));
 
     // lights
 
     let light: THREE.Light;
 
-    light = new THREE.DirectionalLight(0xffffff);
-    light.position.set(1, 1, 1);
+    light = new THREE.DirectionalLight(0xffffff, 0.8);
+    light.position.set(30, 50, 10);
     scene.add(light);
 
-    light = new THREE.DirectionalLight(0x002288);
-    light.position.set(- 1, - 1, - 1);
+    light = new THREE.DirectionalLight(0xffffff, 0.3);
+    light.position.set(-30, -50, -10);
     scene.add(light);
 
-    light = new THREE.AmbientLight(0x222222);
+    light = new THREE.AmbientLight(0x222222, .4);
     scene.add(light);
 
-    //
+    // events
 
     window.addEventListener('resize', onWindowResize, false);
 
+    // code
+
+    const geometry1 = new THREE.BoxBufferGeometry(10, 120, 40);
+    const material1 = new THREE.MeshStandardMaterial({ color: 0x2194ce, roughness: 1, metalness: 0 });
+    const cube1 = new THREE.Mesh(geometry1, material1);
+    scene.add(cube1);
+
+    const geometry2 = new THREE.BoxBufferGeometry(10, 120, 40);
+    const material2 = new THREE.MeshStandardMaterial({ color: 0xce9421, roughness: 1, metalness: 0 });
+    const cube2 = new THREE.Mesh(geometry2, material2);
+    scene.add(cube2);
+
+    cube1.quaternion.setFromEuler(new THREE.Euler(Math.PI / 2, Math.PI / 3, 0, 'YXZ'));
+    cube2.quaternion.setFromEuler(new THREE.Euler(Math.PI / 2, Math.PI / 3, 0, 'XYZ'));
+
+    //const angle = new THREE.Euler(0, 0, 0, 'XYZ');
+    //cube.rotation.setFromVector3()
 }
 
 function onWindowResize() {
-
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-
 }
 
 function animate() {
-
     requestAnimationFrame(animate);
 
     controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
 
     render();
-
 }
 
 function render() {
-
     renderer.render(scene, camera);
-
 }
