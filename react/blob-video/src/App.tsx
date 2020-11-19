@@ -78,11 +78,16 @@ function App() {
 
   return (
     <div className="App">
+      <span className="progress">appCodeName: {navigator.appCodeName}</span>
+      <span className="progress">appName: {navigator.appName}</span>
+      <span className="progress">appVersion: {navigator.appVersion}</span>
+      <span className="progress">platform: {navigator.platform}</span>
+      <span className="progress">userAgent: {navigator.userAgent}</span>
       <input type="button" value="load" onClick={onLoad} />
       <span className="progress">Bytes loaded: {progress}</span>
       <input type="button" value="play" onClick={onPlay} disabled={progress < 100} />
       <input type="button" value="pause" onClick={onPause} disabled={progress < 100} />
-      <video src={null} ref={videoRef} width={368} height={207} />
+      <video src={null} ref={videoRef} width={368} height={207} playsInline={true} />
     </div>
   );
 }
