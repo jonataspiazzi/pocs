@@ -85,9 +85,13 @@ function App() {
       <span className="progress">userAgent: {navigator.userAgent}</span>
       <input type="button" value="load" onClick={onLoad} />
       <span className="progress">Bytes loaded: {progress}</span>
-      <input type="button" value="play" onClick={onPlay} disabled={progress < 100} />
-      <input type="button" value="pause" onClick={onPause} disabled={progress < 100} />
-      <video src={null} ref={videoRef} width={368} height={207} playsInline={true} />
+      <div className="container">
+        <video src={null} ref={videoRef} />
+        <div className="hud">
+          <input type="button" value="play" onClick={onPlay} disabled={progress < 100} />
+          <input type="button" value="pause" onClick={onPause} disabled={progress < 100} />
+        </div>
+      </div>
     </div>
   );
 }

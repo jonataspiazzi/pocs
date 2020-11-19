@@ -5,11 +5,36 @@
   align-items: flex-start;
 }
 
-.App video, .App span, .App input {
+.App span, .App input {
   margin: 10px;
   margin-bottom: 0;
 }
 
 input[type=button] {
   padding: 4px 10px;
+}
+
+.container {
+  width: 90vw;
+  height: calc(90vw * 9 / 16);
+  position: relative;
+  padding: 0;
+}
+
+.container video,
+.container .hud {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.container .hud {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 0, 0, .3);
+  padding: 0;
 }
