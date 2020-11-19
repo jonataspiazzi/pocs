@@ -86,7 +86,7 @@ function App() {
       <input type="button" value="load" onClick={onLoad} />
       <span className="progress">Bytes loaded: {progress}</span>
       <div className="container">
-        <video src={null} ref={videoRef} />
+        <video src={null} ref={videoRef} playsInline={true} />
         <div className="hud">
           <input type="button" value="play" onClick={onPlay} disabled={progress < 100} />
           <input type="button" value="pause" onClick={onPause} disabled={progress < 100} />
