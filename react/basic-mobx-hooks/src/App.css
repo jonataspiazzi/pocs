@@ -1,7 +1,14 @@
 .App {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+}
+
+.App ul, .App form, .App h1 {
+  margin: 10px;
+  margin-bottom: 0;
+}
+
+button, input[type=text] {
+  padding: 4px 10px;
+  margin-right: 10px;
+  border-radius: 0;
+  border: 1px solid black;
 }
